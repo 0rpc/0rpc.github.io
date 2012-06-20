@@ -1,0 +1,22 @@
+<h2>{{title}}</h2>
+<div class="row">
+    {{#types}}
+        <div class="span6">
+            <h3>{{type}}</h3>
+
+            <div class="tabbable">
+                <ul class="nav nav-tabs">
+                    {{#languages}}
+                        <li><a href="#{{tabId}}" data-toggle="tab">{{language}}</a></li>
+                    {{/languages}}
+                </ul>
+
+                <div class="tab-content">
+                    {{#languages}}
+                        <pre id="{{tabId}}" class="fat tab-pane {{hljsClass}}">{{&source}}</pre>
+                    {{/languages}}
+                </div>
+            </div>
+        </div>
+    {{/types}}
+</div>

@@ -1,0 +1,80 @@
+/*
+ * COLOR PALETTE: Van den Hof (courtesy of RedDragon
+ * http://www.colourlovers.com/palette/18/van_den_Hof
+ *
+ * red: #EE3D40, white, black, blue: #AABAC5
+ */
+body {
+    background-color: #EEE;
+    background-image: url(../img/sky.png);
+    background-repeat: repeat-x;
+    font-size: 16px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Open Sans Light', sans-serif;
+    font-weight: normal;
+    padding: 0.5em;
+    margin: 0;
+}
+
+h1 {
+    font-size: 108px;
+    letter-spacing: -4px;
+    text-align: center;
+}
+
+h2 {
+    font-size: 24px;
+    text-align: center;
+}
+
+.dark-panel {
+    color: #EEEEEE;
+    background-color: #000000;
+    width: 100%;
+    padding: 1em;
+    text-align: center;
+    margin: 1em 0 1em 0;
+
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+    filter: alpha(opacity=80);
+    -moz-opacity:0.8;
+    -khtml-opacity: 0.8;
+    opacity: 0.8;
+}
+
+.red {
+    color: #EE3D40;
+}
+
+.blue {
+    color: #AABAC5;
+}
+
+.center {
+    text-align: center;
+}
+
+.btn-jumbo {
+    font-size: 20px;
+    font-weight: normal;
+    padding: 14px 24px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+}
+
+.btn-fixed {
+    width: 150px;
+}
+
+.container {
+    width: 940px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+pre.fat {
+    height: 234px;
+}
