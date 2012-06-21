@@ -51,7 +51,7 @@ strong{
 }
 
 pre {
-
+	background: #FFF;
 }
 
 hr {
@@ -241,6 +241,7 @@ blockquote small {
     margin-left: auto;
     margin-right: auto;
 }
+
 
 pre.fat {
     height: 234px;
