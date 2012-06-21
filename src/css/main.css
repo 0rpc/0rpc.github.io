@@ -180,6 +180,7 @@ blockquote small {
 	border-bottom: 1px solid #CCC;
     border-radius: 3px 3px 3px 3px;
 	text-align: center;
+	box-shadow: 0 2px 8px #DDD;
 }
 
 
