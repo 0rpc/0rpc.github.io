@@ -62,10 +62,5 @@ try {
     wrench.rmdirSyncRecursive("./bin");
 } catch(e) {}
 
-fs.mkdirSync("./bin");
-fs.linkSync("./dotcloud.yml", "./bin/dotcloud.yml");
-wrench.copyDirSyncRecursive("./src", "./bin/www");
-wrench.copyDirSyncRecursive("./lib", "./bin/www/lib");
-
-var source = fs.readFileSync("./bin/www/index.html", "utf8").replace("__EXAMPLES__", examples.join("\n"));
-fs.writeFileSync("./bin/www/index.html", source);
+var source = fs.readFileSync("./src/index.html", "utf8").replace("__EXAMPLES__", examples.join("\n"));
+fs.writeFileSync("./index.html", source);

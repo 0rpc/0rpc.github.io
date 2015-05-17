@@ -1,57 +1,43 @@
 <html>
     <head>
-        <title>ZeroRPC</title>
+        <title>zerorpc</title>
         <link type="text/css" rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
         <link type="text/css" rel="stylesheet" href="lib/highlight/styles/vs.css" />
-        <link type="text/css" rel="stylesheet" href="css/main.css" />
-
-        <script type="text/javascript">
-          var _gaq = _gaq || [];
-          _gaq.push(['_setAccount', 'UA-32861350-1']);
-          _gaq.push(['_trackPageview']);
-
-          (function() {
-            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-          })();
-        </script>
+        <link type="text/css" rel="stylesheet" href="src/css/main.css" />
     </head>
     <body>
 
         <div class="container">
-			<div class="hero-unit">
-		        <h1>Zero<span class="red">RPC</span></h1>
-		        <h2>So good you'll forget the R</h2>
-				<p style="text-align: justify;">
-	            ZeroRPC is a light-weight, reliable and language-agnostic
+            <div class="hero-unit">
+                <h1>zerorpc</h1>
+                <h2>An easy to use, intuitive, and cross-language RPC</h2>
+                <p style="text-align: justify;">
+                zerorpc is a light-weight, reliable and language-agnostic
                 library for distributed communication between server-side
                 processes. It builds on top of
                 <a href="http://www.zeromq.org/">ZeroMQ</a> and
                 <a href="http://msgpack.org/">MessagePack</a>.
-                Support for streamed responses - similar to python generators
-                - makes ZeroRPC more than a typical RPC engine. Built-in
+                Support for streamed responses - similar to python generators -
+                makes zerorpc more than a typical RPC engine. Built-in
                 heartbeats and timeouts detect and recover from failed
                 requests. Introspective capabilities, first-class exceptions
-                and the command-line utility make debugging easy. ZeroRPC
-                powers the infrastructure behind
-	            <a href="http://dotcloud.com" target="_blank">dotCloud</a>.
-				</p>
-                 <div class="center">
-					<h2>Get The Source</h2>
-					<a class="btn btn-inverse" href="https://github.com/dotcloud/zerorpc-python">
-					    Python
-					</a>
-					<a class="btn btn-inverse" href="https://github.com/dotcloud/zerorpc-node">
-					    Node.js
-					</a>
-                 </div>
-			</div>
+                and the command-line utility make debugging easy.
+                </p>
+                <div class="center">
+                    <h2>Get The Source</h2>
+                    <a class="btn btn-inverse" href="https://github.com/dotcloud/zerorpc-python">
+                        Python
+                    </a>
+                    <a class="btn btn-inverse" href="https://github.com/dotcloud/zerorpc-node">
+                        Node.js
+                    </a>
+                </div>
+            </div>
         </div>
 
         <div class="container">
             <h2>Installation</h2>
-            
+
             <div class="tabbable">
                 <ul class="nav nav-tabs">
                     <li><a href="#tab-install-python" data-toggle="tab">python</a></li>
@@ -86,16 +72,13 @@
                 </div>
             </div>
         </div>
-		<footer>
-			<div class="container">
-			<div class="row">
-                <div class="span12 center">
-	                <p>Powered by</p>
-	                <a href="http://dotcloud.com" target="_blank">
-                        <img src="img/dotcloud.png" alt="dotCloud" />
-                    </a>
-				</div>
-			</div>
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="span12 center">
+                        -- zerorpc --
+                    </div>
+                </div>
         </footer>
         <script type="text/javascript" src="lib/jquery.min.js"></script>
         <script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>

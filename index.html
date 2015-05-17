@@ -1,0 +1,209 @@
+<html>
+    <head>
+        <title>zerorpc</title>
+        <link type="text/css" rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
+        <link type="text/css" rel="stylesheet" href="lib/highlight/styles/vs.css" />
+        <link type="text/css" rel="stylesheet" href="src/css/main.css" />
+    </head>
+    <body>
+
+        <div class="container">
+            <div class="hero-unit">
+                <h1>zerorpc</h1>
+                <h2>An easy to use, intuitive, and cross-language RPC</h2>
+                <p style="text-align: justify;">
+                zerorpc is a light-weight, reliable and language-agnostic
+                library for distributed communication between server-side
+                processes. It builds on top of
+                <a href="http://www.zeromq.org/">ZeroMQ</a> and
+                <a href="http://msgpack.org/">MessagePack</a>.
+                Support for streamed responses - similar to python generators -
+                makes zerorpc more than a typical RPC engine. Built-in
+                heartbeats and timeouts detect and recover from failed
+                requests. Introspective capabilities, first-class exceptions
+                and the command-line utility make debugging easy.
+                </p>
+                <div class="center">
+                    <h2>Get The Source</h2>
+                    <a class="btn btn-inverse" href="https://github.com/dotcloud/zerorpc-python">
+                        Python
+                    </a>
+                    <a class="btn btn-inverse" href="https://github.com/dotcloud/zerorpc-node">
+                        Node.js
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <h2>Installation</h2>
+
+            <div class="tabbable">
+                <ul class="nav nav-tabs">
+                    <li><a href="#tab-install-python" data-toggle="tab">python</a></li>
+                    <li><a href="#tab-install-nodejs" data-toggle="tab">node.js</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <pre id="tab-install-python" class="tab-pane">pip install zerorpc</pre>
+                    <pre id="tab-install-nodejs" class="tab-pane">npm install zerorpc</pre>
+                </div>
+            </div>
+
+            <div id="examples">
+                <h2>Hello World</h2>
+<div class="row">
+        <div class="span6">
+            <h3>Server</h3>
+
+            <div class="tabbable">
+                <ul class="nav nav-tabs">
+                        <li><a href="#hello-world-server-python" data-toggle="tab">python</a></li>
+                        <li><a href="#hello-world-server-nodejs" data-toggle="tab">node.js</a></li>
+                </ul>
+
+                <div class="tab-content">
+                        <pre id="hello-world-server-python" class="fat tab-pane python">import zerorpc<br/><br/>class HelloRPC(object):<br/>    def hello(self, name):<br/>        return "Hello, %s" % name<br/><br/>s = zerorpc.Server(HelloRPC())<br/>s.bind("tcp://0.0.0.0:4242")<br/>s.run()</pre>
+                        <pre id="hello-world-server-nodejs" class="fat tab-pane javascript">var zerorpc = require("zerorpc");<br/><br/>var server = new zerorpc.Server({<br/>    hello: function(name, reply) {<br/>        reply("Hello, " + name);<br/>    }<br/>});<br/><br/>server.bind("tcp://0.0.0.0:4242");</pre>
+                </div>
+            </div>
+        </div>
+        <div class="span6">
+            <h3>Client</h3>
+
+            <div class="tabbable">
+                <ul class="nav nav-tabs">
+                        <li><a href="#hello-world-client-python" data-toggle="tab">python</a></li>
+                        <li><a href="#hello-world-client-nodejs" data-toggle="tab">node.js</a></li>
+                        <li><a href="#hello-world-client-cli" data-toggle="tab">cli</a></li>
+                </ul>
+
+                <div class="tab-content">
+                        <pre id="hello-world-client-python" class="fat tab-pane python">import zerorpc<br/><br/>c = zerorpc.Client()<br/>c.connect("tcp://127.0.0.1:4242")<br/>print c.hello("RPC")</pre>
+                        <pre id="hello-world-client-nodejs" class="fat tab-pane javascript">var zerorpc = require("zerorpc");<br/><br/>var client = new zerorpc.Client();<br/>client.connect("tcp://127.0.0.1:4242");<br/><br/>client.invoke("hello", "RPC", function(error, res, more) {<br/>    console.log(res);<br/>});</pre>
+                        <pre id="hello-world-client-cli" class="fat tab-pane no-highlight">zerorpc tcp://127.0.0.1:4242 hello RPC</pre>
+                </div>
+            </div>
+        </div>
+</div>
+<h2>Streaming Responses</h2>
+<div class="row">
+        <div class="span6">
+            <h3>Server</h3>
+
+            <div class="tabbable">
+                <ul class="nav nav-tabs">
+                        <li><a href="#streaming-responses-server-python" data-toggle="tab">python</a></li>
+                        <li><a href="#streaming-responses-server-nodejs" data-toggle="tab">node.js</a></li>
+                </ul>
+
+                <div class="tab-content">
+                        <pre id="streaming-responses-server-python" class="fat tab-pane python">import zerorpc<br/><br/>class StreamingRPC(object):<br/>    @zerorpc.stream<br/>    def streaming_range(self, fr, to, step):<br/>        return xrange(fr, to, step)<br/><br/>s = zerorpc.Server(StreamingRPC())<br/>s.bind("tcp://0.0.0.0:4242")<br/>s.run()</pre>
+                        <pre id="streaming-responses-server-nodejs" class="fat tab-pane javascript">var zerorpc = require("zerorpc");<br/><br/>var server = new zerorpc.Server({<br/>    streaming_range: function(from, to, step, reply) {<br/>        for(var i=from; i&lt;to; i+=step) {<br/>            reply(i, i + step &lt; to);<br/>        }<br/>    }<br/>});<br/><br/>server.bind("tcp://0.0.0.0:4242");</pre>
+                </div>
+            </div>
+        </div>
+        <div class="span6">
+            <h3>Client</h3>
+
+            <div class="tabbable">
+                <ul class="nav nav-tabs">
+                        <li><a href="#streaming-responses-client-python" data-toggle="tab">python</a></li>
+                        <li><a href="#streaming-responses-client-nodejs" data-toggle="tab">node.js</a></li>
+                        <li><a href="#streaming-responses-client-cli" data-toggle="tab">cli</a></li>
+                </ul>
+
+                <div class="tab-content">
+                        <pre id="streaming-responses-client-python" class="fat tab-pane python">import zerorpc<br/><br/>c = zerorpc.Client()<br/>c.connect("tcp://127.0.0.1:4242")<br/><br/>for item in c.streaming_range(10, 20, 2):<br/>    print item</pre>
+                        <pre id="streaming-responses-client-nodejs" class="fat tab-pane javascript">var zerorpc = require("zerorpc");<br/><br/>var client = new zerorpc.Client();<br/>client.connect("tcp://127.0.0.1:4242");<br/><br/>client.invoke("streaming_range", 10, 20, 2, function(error, res, more) {<br/>    console.log(res);<br/>});</pre>
+                        <pre id="streaming-responses-client-cli" class="fat tab-pane no-highlight">zerorpc tcp://127.0.0.1:4242 streaming_range 10 20 2 --json</pre>
+                </div>
+            </div>
+        </div>
+</div>
+<h2>First Class Exceptions</h2>
+<div class="row">
+        <div class="span6">
+            <h3>Server</h3>
+
+            <div class="tabbable">
+                <ul class="nav nav-tabs">
+                        <li><a href="#first-class-exceptions-server-python" data-toggle="tab">python</a></li>
+                        <li><a href="#first-class-exceptions-server-nodejs" data-toggle="tab">node.js</a></li>
+                </ul>
+
+                <div class="tab-content">
+                        <pre id="first-class-exceptions-server-python" class="fat tab-pane python">import zerorpc<br/><br/>class ExceptionalRPC(object):<br/>    def bad(self):<br/>        raise Exception(":P")<br/><br/>s = zerorpc.Server(ExceptionalRPC())<br/>s.bind("tcp://0.0.0.0:4242")<br/>s.run()</pre>
+                        <pre id="first-class-exceptions-server-nodejs" class="fat tab-pane javascript">var zerorpc = require("zerorpc");<br/><br/>var server = new zerorpc.Server({<br/>    bad: function(reply) {<br/>        //The first parameter to reply() is for errors<br/>        //Also possible:<br/>        //  reply(new Error(":P"), null, false);<br/>        reply(":P", null, false);<br/>    }<br/>});<br/><br/>server.bind("tcp://0.0.0.0:4242");</pre>
+                </div>
+            </div>
+        </div>
+        <div class="span6">
+            <h3>Client</h3>
+
+            <div class="tabbable">
+                <ul class="nav nav-tabs">
+                        <li><a href="#first-class-exceptions-client-python" data-toggle="tab">python</a></li>
+                        <li><a href="#first-class-exceptions-client-nodejs" data-toggle="tab">node.js</a></li>
+                        <li><a href="#first-class-exceptions-client-cli" data-toggle="tab">cli</a></li>
+                </ul>
+
+                <div class="tab-content">
+                        <pre id="first-class-exceptions-client-python" class="fat tab-pane python">import zerorpc<br/><br/>c = zerorpc.Client()<br/>c.connect("tcp://127.0.0.1:4242")<br/><br/>try:<br/>    c.bad()<br/>except Exception, e:<br/>    print "An error occurred: %s" % e</pre>
+                        <pre id="first-class-exceptions-client-nodejs" class="fat tab-pane javascript">var zerorpc = require("zerorpc");<br/><br/>var client = new zerorpc.Client();<br/>client.connect("tcp://127.0.0.1:4242");<br/><br/>client.invoke("bad", function(error, res, more) {<br/>    console.error("An error occurred:", error);<br/>});</pre>
+                        <pre id="first-class-exceptions-client-cli" class="fat tab-pane no-highlight">zerorpc tcp://127.0.0.1:4242 bad</pre>
+                </div>
+            </div>
+        </div>
+</div>
+            </div>
+
+            <div class="row">
+                <div class="span12 center">
+                    <h2>Documentation</h2>
+
+                    <div>
+                        <a class="btn btn-inverse" href="http://www.youtube.com/watch?v=9G6-GksU7Ko">
+                            Pycon Video
+                        </a>
+                        <a class="btn btn-inverse" href="http://pycon-2012-notes.readthedocs.org/en/latest/dotcloud_zerorpc.html">
+                            Pycon Notes
+                        </a>
+                        <a class="btn btn-inverse" href="https://github.com/dotcloud/zerorpc-python/blob/master/doc/protocol.md">
+                            Protocol Outline
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="span12 center">
+                        -- zerorpc --
+                    </div>
+                </div>
+        </footer>
+        <script type="text/javascript" src="lib/jquery.min.js"></script>
+        <script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="lib/highlight/highlight.pack.js"></script>
+
+        <script type="text/javascript">
+        $(function() {
+            $(".nav-tabs > :first-child").addClass("active");
+            $(".tab-content > :first-child").addClass("active");
+
+            $("h2").each(function() {
+                var words = $(this).html().split(/\s+/);
+                var lastWord = words.pop();
+                var firstPart = words.join(" ");
+                $(this).html([firstPart, "<span class='red'>", lastWord, "</span>"].join(" "));
+            });
+
+            $("pre").each(function(i, e) {
+                hljs.highlightBlock(e);
+            });
+        });
+        </script>
+    </body>
+</html>
