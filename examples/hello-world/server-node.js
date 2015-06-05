@@ -2,7 +2,7 @@ var zerorpc = require("zerorpc");
 
 var server = new zerorpc.Server({
     hello: function(name, reply) {
-        reply("Hello, " + name);
+        reply(null, "Hello, " + name);
     }
 });
 

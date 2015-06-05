@@ -25,10 +25,10 @@
                 </p>
                 <div class="center">
                     <h2>Get The Source</h2>
-                    <a class="btn btn-inverse" href="https://github.com/dotcloud/zerorpc-python">
+                    <a class="btn btn-inverse" href="https://github.com/0rpc/zerorpc-python">
                         Python
                     </a>
-                    <a class="btn btn-inverse" href="https://github.com/dotcloud/zerorpc-node">
+                    <a class="btn btn-inverse" href="https://github.com/0rpc/zerorpc-node">
                         Node.js
                     </a>
                 </div>
@@ -64,7 +64,7 @@
 
                 <div class="tab-content">
                         <pre id="hello-world-server-python" class="fat tab-pane python">import zerorpc<br/><br/>class HelloRPC(object):<br/>    def hello(self, name):<br/>        return "Hello, %s" % name<br/><br/>s = zerorpc.Server(HelloRPC())<br/>s.bind("tcp://0.0.0.0:4242")<br/>s.run()</pre>
-                        <pre id="hello-world-server-nodejs" class="fat tab-pane javascript">var zerorpc = require("zerorpc");<br/><br/>var server = new zerorpc.Server({<br/>    hello: function(name, reply) {<br/>        reply("Hello, " + name);<br/>    }<br/>});<br/><br/>server.bind("tcp://0.0.0.0:4242");</pre>
+                        <pre id="hello-world-server-nodejs" class="fat tab-pane javascript">var zerorpc = require("zerorpc");<br/><br/>var server = new zerorpc.Server({<br/>    hello: function(name, reply) {<br/>        reply(null, "Hello, " + name);<br/>    }<br/>});<br/><br/>server.bind("tcp://0.0.0.0:4242");<br/></pre>
                 </div>
             </div>
         </div>
@@ -99,7 +99,7 @@
 
                 <div class="tab-content">
                         <pre id="streaming-responses-server-python" class="fat tab-pane python">import zerorpc<br/><br/>class StreamingRPC(object):<br/>    @zerorpc.stream<br/>    def streaming_range(self, fr, to, step):<br/>        return xrange(fr, to, step)<br/><br/>s = zerorpc.Server(StreamingRPC())<br/>s.bind("tcp://0.0.0.0:4242")<br/>s.run()</pre>
-                        <pre id="streaming-responses-server-nodejs" class="fat tab-pane javascript">var zerorpc = require("zerorpc");<br/><br/>var server = new zerorpc.Server({<br/>    streaming_range: function(from, to, step, reply) {<br/>        for(var i=from; i&lt;to; i+=step) {<br/>            reply(i, i + step &lt; to);<br/>        }<br/>    }<br/>});<br/><br/>server.bind("tcp://0.0.0.0:4242");</pre>
+                        <pre id="streaming-responses-server-nodejs" class="fat tab-pane javascript">var zerorpc = require("zerorpc");<br/><br/>var server = new zerorpc.Server({<br/>    streaming_range: function(from, to, step, reply) {<br/>        for(var i=from; i&lt;to; i+=step) {<br/>            reply(null, i, i + step &lt; to);<br/>        }<br/>    }<br/>});<br/><br/>server.bind("tcp://0.0.0.0:4242");<br/></pre>
                 </div>
             </div>
         </div>
@@ -169,7 +169,7 @@
                         <a class="btn btn-inverse" href="http://pycon-2012-notes.readthedocs.org/en/latest/dotcloud_zerorpc.html">
                             Pycon Notes
                         </a>
-                        <a class="btn btn-inverse" href="https://github.com/dotcloud/zerorpc-python/blob/master/doc/protocol.md">
+                        <a class="btn btn-inverse" href="https://github.com/0rpc/zerorpc-python/blob/master/doc/protocol.md">
                             Protocol Outline
                         </a>
                     </div>
