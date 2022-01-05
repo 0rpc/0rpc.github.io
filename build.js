@@ -44,7 +44,7 @@ var examples = _.map(EXAMPLES, function(title) {
         });
     };
 
-    return mustache.to_html(exampleTemplate, {
+    return mustache.render(exampleTemplate, {
         title: title,
         exampleId: exampleId,
 

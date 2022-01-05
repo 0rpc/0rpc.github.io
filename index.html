@@ -79,7 +79,7 @@
                 </ul>
 
                 <div class="tab-content">
-                        <pre id="hello-world-client-python" class="fat tab-pane python">import zerorpc<br/><br/>c = zerorpc.Client()<br/>c.connect("tcp://127.0.0.1:4242")<br/>print c.hello("RPC")</pre>
+                        <pre id="hello-world-client-python" class="fat tab-pane python">import zerorpc<br/><br/>c = zerorpc.Client()<br/>c.connect("tcp://127.0.0.1:4242")<br/>print(c.hello("RPC"))<br/></pre>
                         <pre id="hello-world-client-nodejs" class="fat tab-pane javascript">var zerorpc = require("zerorpc");<br/><br/>var client = new zerorpc.Client();<br/>client.connect("tcp://127.0.0.1:4242");<br/><br/>client.invoke("hello", "RPC", function(error, res, more) {<br/>    console.log(res);<br/>});</pre>
                         <pre id="hello-world-client-cli" class="fat tab-pane no-highlight">zerorpc tcp://127.0.0.1:4242 hello RPC</pre>
                 </div>
@@ -98,7 +98,7 @@
                 </ul>
 
                 <div class="tab-content">
-                        <pre id="streaming-responses-server-python" class="fat tab-pane python">import zerorpc<br/><br/>class StreamingRPC(object):<br/>    @zerorpc.stream<br/>    def streaming_range(self, fr, to, step):<br/>        return xrange(fr, to, step)<br/><br/>s = zerorpc.Server(StreamingRPC())<br/>s.bind("tcp://0.0.0.0:4242")<br/>s.run()</pre>
+                        <pre id="streaming-responses-server-python" class="fat tab-pane python">import zerorpc<br/><br/>class StreamingRPC(object):<br/>    @zerorpc.stream<br/>    def streaming_range(self, fr, to, step):<br/>        return range(fr, to, step)<br/><br/>s = zerorpc.Server(StreamingRPC())<br/>s.bind("tcp://0.0.0.0:4242")<br/>s.run()<br/></pre>
                         <pre id="streaming-responses-server-nodejs" class="fat tab-pane javascript">var zerorpc = require("zerorpc");<br/><br/>var server = new zerorpc.Server({<br/>    streaming_range: function(from, to, step, reply) {<br/>        for(var i=from; i&lt;to; i+=step) {<br/>            reply(null, i, i + step &lt; to);<br/>        }<br/>    }<br/>});<br/><br/>server.bind("tcp://0.0.0.0:4242");<br/></pre>
                 </div>
             </div>
@@ -114,7 +114,7 @@
                 </ul>
 
                 <div class="tab-content">
-                        <pre id="streaming-responses-client-python" class="fat tab-pane python">import zerorpc<br/><br/>c = zerorpc.Client()<br/>c.connect("tcp://127.0.0.1:4242")<br/><br/>for item in c.streaming_range(10, 20, 2):<br/>    print item</pre>
+                        <pre id="streaming-responses-client-python" class="fat tab-pane python">import zerorpc<br/><br/>c = zerorpc.Client()<br/>c.connect("tcp://127.0.0.1:4242")<br/><br/>for item in c.streaming_range(10, 20, 2):<br/>    print(item)<br/></pre>
                         <pre id="streaming-responses-client-nodejs" class="fat tab-pane javascript">var zerorpc = require("zerorpc");<br/><br/>var client = new zerorpc.Client();<br/>client.connect("tcp://127.0.0.1:4242");<br/><br/>client.invoke("streaming_range", 10, 20, 2, function(error, res, more) {<br/>    console.log(res);<br/>});</pre>
                         <pre id="streaming-responses-client-cli" class="fat tab-pane no-highlight">zerorpc tcp://127.0.0.1:4242 streaming_range 10 20 2 --json</pre>
                 </div>
@@ -149,7 +149,7 @@
                 </ul>
 
                 <div class="tab-content">
-                        <pre id="first-class-exceptions-client-python" class="fat tab-pane python">import zerorpc<br/><br/>c = zerorpc.Client()<br/>c.connect("tcp://127.0.0.1:4242")<br/><br/>try:<br/>    c.bad()<br/>except Exception, e:<br/>    print "An error occurred: %s" % e</pre>
+                        <pre id="first-class-exceptions-client-python" class="fat tab-pane python">import zerorpc<br/><br/>c = zerorpc.Client()<br/>c.connect("tcp://127.0.0.1:4242")<br/><br/>try:<br/>    c.bad()<br/>except Exception as e:<br/>    print("An error occurred: %s" % e)<br/></pre>
                         <pre id="first-class-exceptions-client-nodejs" class="fat tab-pane javascript">var zerorpc = require("zerorpc");<br/><br/>var client = new zerorpc.Client();<br/>client.connect("tcp://127.0.0.1:4242");<br/><br/>client.invoke("bad", function(error, res, more) {<br/>    console.error("An error occurred:", error);<br/>});</pre>
                         <pre id="first-class-exceptions-client-cli" class="fat tab-pane no-highlight">zerorpc tcp://127.0.0.1:4242 bad</pre>
                 </div>
